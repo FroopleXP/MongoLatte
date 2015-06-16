@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+	<title>MongoLatte - Coffee ordering with NodeJS!</title>
+
+	<!-- Adding the web socket -->
+	<script src="http://127.0.0.1:8080/socket.io/socket.io.js"></script>
+
+	<!-- Including the CDN's -->
+	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+	<script src="js/order.js"></script>
+
+</head>
+<body>
+
+	<div class="container">
+
+		<h1>MongoLatte</h1>
+		<i>Place your order below...</i><hr />
+
+		<form id="new_order">
+			<div class="form-group">
+				<label for="cli_name">Customer's name (first only):</label>
+				<input type="text" class="form-control" id="cli_name" placeholder="Customer's name">
+			</div>
+
+			<div class="form-group">
+				<label for="cli_order">Their order:</label>
+				<input type="text" class="form-control" id="cli_order" placeholder="Their order">
+			</div>
+			<button type="submit" class="btn btn-success">Place order</button>
+		</form><hr />
+
+	</div>
+
+</body>
+</html>
