@@ -1,48 +1,62 @@
 // Grabbing the dependencies
 var io = require('socket.io').listen(8080).sockets;
-var mongojs = require('mongojs');
-var db = mongojs('localhost/mongolatte', ['orders']);
+var mongo = require('mongodb').MongoClient;
+
+// Connecting to MongoDB
+mongo.connect('mongodb://127.0.0.1/mongolatte', function(err, db) {
+	// Checking for connection error
+	if (err) {
+		throw err; // Spitting out the error to the server
+	} else {
+		// New connection
+		io.on('connection', function(socket) {
+			// Alerting the server
+			console.log("User " + socket.id + " has connected.");
+
+			// Adding the orders collection
+			var col = db.collection('orders');
+
+			// Sending the orders to the new user
+			col.find().sort({_id: 1}).toArray(function(err, res) {
+				// Checking for errors
+				if (err) {
+					throw err; // Sending the error the server
+				} else {
+					socket.emit('orders', res); // Sending the orders to the user
+				}
+			});
+
+			// New order
+			socket.on('new_order', function(data) {
+				// Getting the order information
+				var cli_name = data.cli_name;
+				var cli_order = data.cli_order;
+
+				// Spitting the new order to the server
+				console.log("A new order for: " + cli_name);
+
+				// Saving the order
+				col.insert({cli_name: cli_name, cli_order: cli_order}, function() {
+					console.log('Order for: ' + cli_name + " has been inserted!");
+				});
+
+				// Sending response
+				socket.emit('order_stat', {stat: "Order added!"});
+
+			});
+
+			// Disconnect
+			socket.on('disconnect', function() {
+				// Alerting the server
+				console.log("User " + socket.id + " has disconnected.");
+
+			});
+
+		});
+	}
+});
 
 console.log("Order server started...");
-
-// New connection
-io.on('connection', function(socket) {
-	// Alerting the server
-	console.log("User " + socket.id + " has connected.");
-
-	// New order
-	socket.on('new_order', function(data) {
-		// Getting the order information
-		var cli_name = data.cli_name;
-		var cli_order = data.cli_order;
-		var add_order = add_order(cli_name, cli_order);
-
-		// Spitting the new order to the server
-		console.log("A new order for: " + cli_name);
-
-		// Saving the order
-		db.orders.save(new_order, function(err, saved_order) {
-			if (err || !saved_order) {
-				// There was an error
-				console.log("There was an error saving the order..." + err);
-				// Sending the error back to the user
-				socket.emit('order_stat', {stat: "There was an error: " + err});
-			} else {
-				// All good
-				console.log("Record for " + saved_order.cli_name + " was saved successfully!");
-			}
-		});
-
-	});
-
-	// Disconnect
-	socket.on('disconnect', function() {
-		// Alerting the server
-		console.log("User " + socket.id + " has disconnected.");
-
-	});
-
-});
 
 // Object for storing the order
 function add_order(cli_name, cli_order) {

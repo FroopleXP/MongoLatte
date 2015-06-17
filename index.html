@@ -13,6 +13,16 @@
 	<script src="js/order.js"></script>
 
 </head>
+<style>
+
+	/*Span for the server repsonse*/
+	.save_stat {
+		margin-left: 10px;
+		font-style: italic;
+		color: #aaa;
+	}
+
+</style>
 <body>
 
 	<div class="container">
@@ -30,8 +40,11 @@
 				<label for="cli_order">Their order:</label>
 				<input type="text" class="form-control" id="cli_order" placeholder="Their order">
 			</div>
-			<button type="submit" class="btn btn-success">Place order</button>
-		</form><hr />
+			<button type="submit" class="btn btn-success">Place order</button><span class="save_stat"></span><hr />
+			<div id="order_content">
+				<!-- Added via JavaScript -->
+			</div>
+		</form>
 
 	</div>
 
