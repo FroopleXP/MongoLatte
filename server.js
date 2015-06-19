@@ -52,6 +52,17 @@ mongo.connect('mongodb://127.0.0.1/mongolatte', function(err, db) {
 
 			});
 
+			// Delete order
+			socket.on('delete_order', function(data) {
+				// Getting the ID from the request
+				var id = data.oid;
+				// Removing from the database
+				col.remove({"_id": "'" + id + "'"});
+				// Sending response
+				socket.emit('order_stat', {stat: "Removed"});
+
+			});
+
 		});
 	}
 });

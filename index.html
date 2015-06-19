@@ -22,6 +22,27 @@
 		color: #aaa;
 	}
 
+	/*Used to contain the orders*/
+	#order_content {
+		height: 500px;
+		overflow-y: auto;
+	}
+
+	/*Confirm order button*/
+	.del_order {
+		color: #bbb;
+		font-size: 1.1em;
+	}
+
+	.del_order:hover {
+		color: grey;
+		cursor: pointer;
+	} 
+
+	.del_order:active {
+		color: green;
+	}
+
 </style>
 <body>
 
@@ -42,7 +63,9 @@
 			</div>
 			<button type="submit" class="btn btn-success">Place order</button><span class="save_stat"></span><hr />
 			<div id="order_content">
-				<!-- Added via JavaScript -->
+				<table id="order_table" class="table table-hover">
+					<!-- Added via JavaScript -->
+				</table>
 			</div>
 		</form>
 
