@@ -1,7 +1,7 @@
 {
   "name": "MongoLatte",
   "version": "1.2.4",
-  "description": "A simple coffee ordering application written in NodeJS to showcase some of Node's most popular packages.",
+  "description": "A simple coffe ordering application written in NodeJS to showcase some of Node's most popular packages.",
   "main": "server.js",
   "dependencies": {
     "mongodb": "~2.0.34",
