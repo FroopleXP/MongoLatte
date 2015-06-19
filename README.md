@@ -17,13 +17,29 @@ Written By: <i><a href="https://twitter.com/4v3ng3dFoREVer">Connor Edwards</a></
 
 		<code>sudo apt-get update</code><br />
 		<code>sudo apt-get install node npm mongodb</code>	
-	</li>
+	</li><br />
 
 	<li>
 		Open the <b>Terminal</b> and navigate to your web-server directory ~<br />
 		<code>cd /var/www/html</code>
-	</li>
+	</li><br />
 
-	<li>From here you can </li>
+	<li>
+		From here you can clone the repository ~<br />
+		<code>sudo git clone https://github.com/FroopleXP/MongoLatte.git</code><br />
+		This will replicate the repo onto your web-server.
+	</li><br />
+
+	<li>
+		You can now proceed to install the dependencies needed to get MongoLatte up and running ~<br />
+		<code>sudo service mongodb restart</code>
+		<code>cd MongoLatte</code><br />
+		<code>sudo npm install</code><br />
+		<code>nodejs server.js</code>
+	</li><br />
+	
+	<li>
+		That's all!
+	</li>
 </ol>
 
